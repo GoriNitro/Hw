@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Hw</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="_1">Введите текст 1</string>
+    <string name="_2">Введите текст 2</string>
+    <string name="save">save</string>
+</resources>
