@@ -14,6 +14,7 @@ import com.example.hw.data.local.model.Data
 import com.example.hw.data.local.sharedpreferences.Pref
 import com.example.hw.databinding.FragmentMenuBinding
 import com.example.hw.presentation.taskmng.adapter.DataAdapter
+import com.example.hw.utils.setLocale
 import com.example.hw.utils.showToast
 
 class MenuFragment : Fragment(), TaskView {
@@ -22,6 +23,7 @@ class MenuFragment : Fragment(), TaskView {
     private val binding: FragmentMenuBinding by lazy {
         FragmentMenuBinding.inflate(layoutInflater)
     }
+    private val pref = Pref(requireContext())
     private val oldList = ArrayList<Data>()
 
     override fun onCreateView(
@@ -34,9 +36,8 @@ class MenuFragment : Fragment(), TaskView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         binding.rvData.layoutManager = LinearLayoutManager(requireActivity())
-        val pref = Pref(requireContext())
+
 
         viewModel.dataList.observe(viewLifecycleOwner) { data ->
             if (oldList.isEmpty()) {
@@ -45,10 +46,10 @@ class MenuFragment : Fragment(), TaskView {
 
             val adapter = DataAdapter(data,
                 onItemClick = {
-                    showToast("List is empty")
+                    showToast(getString(R.string.list_is_empty))
                 },
                 onClick = {
-                    showToast("Item remove is successful!")
+                    showToast(getString(R.string.item_remove_is_successful))
                 })
 
             binding.rvData.adapter = adapter
@@ -61,14 +62,14 @@ class MenuFragment : Fragment(), TaskView {
         binding.btnAdd.setOnClickListener {
             val isListChanged = data != oldList
             if (isListChanged) {
-                AlertDialog.Builder(requireContext()).setTitle("Подтверждение")
-                    .setMessage("Список изменился. Сохранить изменения?")
+                AlertDialog.Builder(requireContext()).setTitle(getString(R.string.confirm))
+                    .setMessage(getString(R.string.list_is_changed_save_changes))
 
-                    .setPositiveButton("Yes") { _, _ ->
+                    .setPositiveButton(getString(R.string.Yes)) { _, _ ->
                         viewModel.saveList(data, pref)
                         findNavController().navigate(R.id.addFragment)
                     }
-                    .setNegativeButton("No") { dialog, _ ->
+                    .setNegativeButton(getString(R.string.No)) { dialog, _ ->
                         dialog.dismiss()
                         viewModel.getList(pref)
                     }.create().show()
@@ -79,7 +80,7 @@ class MenuFragment : Fragment(), TaskView {
         }
     }
 
-    override fun toast(msg: String) {
-        showToast(msg)
+    override fun toastEmptyList() {
+        showToast(getString(R.string.list_is_empty))
     }
 }

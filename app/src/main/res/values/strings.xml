@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">Hw</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="_1">Введите текст 1</string>
-    <string name="_2">Введите текст 2</string>
+    <string name="_1">Input name</string>
+    <string name="_2">Input title</string>
     <string name="save">save</string>
+    <string name="list_is_empty">list is empty</string>
+    <string name="item_remove_is_successful">Item remove is successful!</string>
+    <string name="No">No</string>
+    <string name="Yes">Yes</string>
+    <string name="list_is_changed_save_changes">List is changed, save changes?</string>
+    <string name="confirm">Confirm</string>
+    <string name="is_empty">Fields cannot be empty</string>
+    <string name="language">English</string>
 </resources>
+

@@ -9,19 +9,24 @@ import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 
 class Pref(context: Context) {
-    private val sharedPreferences = context.getSharedPreferences("MyPrefs", MODE_PRIVATE)
+    private val sharedPreferences = context.getSharedPreferences(MY_PREF, MODE_PRIVATE)
     private val editor = sharedPreferences.edit()
     private val gson = Gson()
 
     fun getObjects(): ArrayList<Data> = gson.fromJson(
-        sharedPreferences.getString("courses", "[]"),
+        sharedPreferences.getString(COURSES, "[]"),
         object : TypeToken<ArrayList<Data>>() {}.type
     ) ?: ArrayList()
 
 
     fun saveData(list: ArrayList<Data>) {
         val json = gson.toJson(list)
-        editor.putString("courses", json).apply()
+        editor.putString(COURSES, json).apply()
 
+    }
+
+    companion object{
+        private const val MY_PREF = "MyPrefs"
+        private const val COURSES = "courses"
     }
 }

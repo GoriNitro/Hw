@@ -11,6 +11,7 @@ import com.example.hw.R
 import com.example.hw.data.local.model.Data
 import com.example.hw.data.local.sharedpreferences.Pref
 import com.example.hw.databinding.FragmentAddBinding
+import com.example.hw.utils.showToast
 
 
 class AddFragment : Fragment() {
@@ -48,9 +49,8 @@ class AddFragment : Fragment() {
                 pref.saveData(list)
                 findNavController().navigate(R.id.menuFragment)
             } else {
-                Toast.makeText(requireContext(), "Поля не могут быть пустыми", Toast.LENGTH_SHORT).show()
+                showToast(getString(R.string.is_empty))
             }
         }
     }
-
 }
